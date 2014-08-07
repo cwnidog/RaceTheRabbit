@@ -1,0 +1,66 @@
+<script>
+
+var distance = 100;   // The race is 100 yards
+var raceDone = false; // true when an animal has crossed the finish line
+
+/* Define an Animal object type and constructor. The constructor takes agruments:
+
+  name      - a string containing the animal's name, e.g. "Squeaky"
+  speed     - a number indicating the animal's top speed, e.g. 6
+  focus     - a number indicating how well the animal concentrates, animals
+              with a higher focus number have a better attention span
+  position  - a number indicating how far along the raceway the animal is,
+              all animals start at position 0.
+*/
+
+// Animal constructor
+function Animal(name, speed, focus){
+  this.name = name;
+  this.speed = speed;
+  this.focus = focus;
+  this.position = 0;
+
+  // A method to advance the Animal's position in the race
+     this.run = function(){
+
+      // move the Animal forward, but allow for the possibility of distraction
+      if (Math.random() * 10 < this.focus){
+        this.position += this.speed;
+      }
+
+      return this.position;
+    } // function run()
+
+} // Animal definition
+
+// A funtion to display information about the winner
+function displayWinner(contestant){
+  alert("And the winner is: " + contestant.name + " With a posiion of " + contestant.position);
+}
+
+// create the contestants - a rabbit and a turtle
+var turtle = new Animal("Yurtle", 1, 10);
+var rabbit = new Animal("Bugs", 4, 2);
+
+// Run the race until somebody corosses the finish line
+while(!raceDone){
+  rabbit.run();
+  turtle.run();
+
+  if((rabbit.position > distance) || (turtle.postion > distance)){
+    raceDone = true; // somebody crossed the finish line
+  }
+} // while the race isn't done
+
+// figure out who won, or if it's a tie
+if (rabbit.position > turtle.position){
+  displayWinner(rabbit);
+}
+else if (turtle.position > rabbit.position){
+  displayWinner(turtle);
+}
+else{
+  alert("It's a tie");
+}
+
+</script>
